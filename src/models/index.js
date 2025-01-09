@@ -1,9 +1,14 @@
 import Branch from "./branch.js";
 import { Customer, DeliveryPartner, Admin } from "./user.js";
+import Product from "./product.js";
+import Category from "./category.js";
+
 
 export {
     Branch,
     Customer,
     DeliveryPartner,
     Admin,
+    Category,
+    Product
 };
