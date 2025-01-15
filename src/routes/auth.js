@@ -11,5 +11,5 @@ import { updateUser } from "../controllers/tracking/user.js";
     fastify.post("/delivery/login",loginDeliveryPartner);
     fastify.post("/refresh-token",refreshToken);
     fastify.get("/user",{preHandler: [verifyToken]} ,fetchUser);
-    fastify.patch("/update-user",{preHandler: [verifyToken]} ,updateUser);
+    fastify.patch("/update/user",{preHandler: [verifyToken]} ,updateUser);
   }
