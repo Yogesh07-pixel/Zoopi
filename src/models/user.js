@@ -31,7 +31,7 @@ const customerSchema = new mongoose.Schema({
         latitude : {
             type: Number,
         },
-        longtitude: {
+        longitude: {
             type: Number,
         },
     },
@@ -65,7 +65,7 @@ const deliveryPartnerSchema = new mongoose.Schema({
         latitude : {
             type: Number,
         },
-        longtitude: {
+        longitude: {
             type: Number,
         },
     },

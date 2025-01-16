@@ -40,7 +40,7 @@ const orderSchema = new mongoose.Schema({
              type: Number,
              required : true,
         },
-        longtitude: {
+        longitude: {
             type : Number,
             required: true,
         },
@@ -53,7 +53,7 @@ const orderSchema = new mongoose.Schema({
             type: Number,
             required : true,
        },
-       longtitude: {
+       longitude: {
            type : Number,
            required: true,
        },
@@ -66,7 +66,7 @@ const orderSchema = new mongoose.Schema({
             type: Number,
             required : true,
        },
-       longtitude: {
+       longitude: {
            type : Number,
            required: true,
        },
