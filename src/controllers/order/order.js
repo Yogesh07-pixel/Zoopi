@@ -10,12 +10,19 @@ export const createOrder = async (req, reply) => {
         const { items, branch, totalPrice } = req.body;
 
         const customerData = await Customer.findById(userId);
-        const branchData = await Branch.find(branch);
+        const branchData = await Branch.findById(branch);
 
         if (!customerData) {
             return reply.status(404).send({
                 message: "Customer not found !"
             });
+        }
+        if (!customerData.liveLocation || !customerData.liveLocation.latitude || !customerData.liveLocation.longitude) {
+            return reply.status(400).send({ message: "Customer live location is incomplete!" });
+        }
+        
+        if (!branchData.location || !branchData.location.latitude || !branchData.location.longitude) {
+            return reply.status(400).send({ message: "Branch location is incomplete!" });
         }
 
         const newOrder = new Order({
@@ -33,8 +40,8 @@ export const createOrder = async (req, reply) => {
                 address: customerData.address || "No address available",
             },
             pickupLocation: {
-                latitude: branchData.liveLocation.latitude,
-                longitude: branchData.liveLocation.longitude,
+                latitude: branchData.location.latitude,
+                longitude: branchData.location.longitude,
                 address: branchData.address || "No address available",
             },
         })
@@ -43,12 +50,12 @@ export const createOrder = async (req, reply) => {
         return reply.status(201).send(saveOrder);
 
     } catch (err) {
-        return reply.status(500).send({
-            message: " Failed to create order ", err
-        });
+        console.log(err);
+        // return reply.status(500).send({
+        //     message: " Failed to create order ", err
+        // });
     }
 };
-
 export const confirmOrder = async (req, reply) => {
     try {
 
@@ -157,7 +164,7 @@ export const getOrders = async(req,reply) => {
             query.customer=customerId
         }
         if(deliveryPartnerId){
-            query.deliveryPartner=status
+            query.deliveryPartner=deliveryPartnerId
             query.branch = branchId
         }
 
@@ -169,6 +176,7 @@ export const getOrders = async(req,reply) => {
 
     }
     catch(error){
+        // console.log(error);
         return reply.status(500).send({
             message : "Failed to retrieve orders",
             error

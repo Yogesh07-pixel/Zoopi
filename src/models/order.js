@@ -64,11 +64,11 @@ const orderSchema = new mongoose.Schema({
     deliveryPersonLocation: {
         latitude: {
             type: Number,
-            required : true,
+            required : false,
        },
        longitude: {
            type : Number,
-           required: true,
+           required: false,
        },
        address : {
            type : String,
@@ -85,7 +85,7 @@ const orderSchema = new mongoose.Schema({
 });
 
 async function getNextSequenceValue(sequenceName) {
- const sequenceDocument = await Counter.findOneandUpdate(
+ const sequenceDocument = await Counter.findOneAndUpdate(
     { name : sequenceName},
     { $inc : { sequence_value : 1 }},
     { new : true, upsert : true}
